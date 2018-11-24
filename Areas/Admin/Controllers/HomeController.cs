@@ -11,7 +11,7 @@ namespace GymApp.Areas.Admin.Controllers
     [Area("Admin")]
     public class HomeController : Controller
     {
-
+        GymAppContext db = new GymAppContext();
         public HomeController()
         {
             
@@ -19,9 +19,8 @@ namespace GymApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("test", "my_val");
-            ViewBag.user = HttpContext.Session.GetString("test");
-            return View();
+            var list= db.User.ToList();
+            return View(list);
         }
     }
 }
